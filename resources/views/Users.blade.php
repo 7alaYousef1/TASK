@@ -1,50 +1,50 @@
 @extends('layouts.app')
 @section('content')
 <div class="container mt-4">
-    <h1>Task List App</h1>
+    <h1>User List App</h1>
     <div class="offset-md-2 col-md-8">
         <div class="card">
-            @if (isset($task))
+            @if (isset($user))
             <div class="card-header">
-                Update Task
+                Update User
             </div>
             <div class="card-body">
-                <!-- Update Task Form -->
+                <!-- Update user Form -->
                 <form action="{{ url('update') }}" method="POST">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $task->id }}">
-                    <!-- Task Name -->
+                    <input type="hidden" name="id" value="{{ $user->id }}">
+                    <!-- user Name -->
                     <div class="mb-3">
-                        <label for="task-name" class="form-label">Task</label>
-                        <input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name }}">
+                        <label for="user-name" class="form-label">User</label>
+                        <input type="text" name="name" id="user-name" class="form-control" value="{{ $user->name }}">
                     </div>
 
-                    <!-- Update Task Button -->
+                    <!-- Update user Button -->
                     <div>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-edit me-2"></i>Update Task
+                            <i class="fa fa-edit me-2"></i>Update user
                         </button>
                     </div>
                 </form>
             </div>
             @else
             <div class="card-header">
-                Update Task
+                Update User
             </div>
             <div class="card-body">
-                <!-- Delete Task Form -->
+                <!-- Delete user Form -->
                 <form action="create" method="POST">
                     @csrf
-                    <!-- Task Name -->
+                    <!-- user Name -->
                     <div class="mb-3">
-                        <label for="task-name" class="form-label">Task</label>
-                        <input type="text" name="name" id="task-name" class="form-control" value="">
+                        <label for="user-name" class="form-label">User</label>
+                        <input type="text" name="name" id="user-name" class="form-control" value="">
                     </div>
 
-                    <!-- Delete Task Button -->
+                    <!-- Delete user Button -->
                     <div>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-plus me-2"></i>Delete Task
+                            <i class="fa fa-plus me-2"></i>Delete User
                         </button>
                     </div>
                 </form>
@@ -52,31 +52,31 @@
             @endif
         </div>
 
-        <!-- Current Tasks -->
+        <!-- Current users -->
         <div class="card mt-4">
             <div class="card-header">
-                Current Tasks
+                Current Users
             </div>
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>Task</th>
+                            <th>User</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($tasks as $task)
+                        @foreach ($users as $user)
                         <tr>
-                            <td>{{$task->name}}</td>
+                            <td>{{$user->name}}</td>
                             <td>
-                                <form action="/delete/{{ $task->id }}" method="POST" class="d-inline">
+                                <form action="/delete/{{ $user->id }}" method="POST" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash me-2"></i>Delete
                                     </button>
                                 </form>
-                                <form action="/edit/{{ $task->id }}" method="POST" class="d-inline">
+                                <form action="/edit/{{ $user->id }}" method="POST" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-info me-2"></i>Edit
