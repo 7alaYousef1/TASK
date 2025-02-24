@@ -16,15 +16,35 @@
                     <!-- user Name -->
                     <div class="mb-3">
                         <label for="user-name" class="form-label">User</label>
-                        <input type="text" name="name" id="user-name" class="form-control" value="{{ $user->name }}">
-                    </div>
+                        <input type="text" name="name" id="user-name" class="form-control @error('name') is-invalid @enderror " value="{{ $user->name }}">
+                        @error('name')
+                        <small class="text-danger">{{ $message }}</small>
 
-                    <!-- Update user Button -->
-                    <div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-edit me-2"></i>Update user
-                        </button>
+                        @enderror
                     </div>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control  @error('email') is-invalid @enderror" placeholder="Your Email" value="{{ $user->email }}">
+                        @error('email')
+                        <small class="text-danger">{{ $message }}</small>
+
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control  @error('password') is-invalid @enderror" placeholder="Your Password" value="{{ $user->password }}">
+                        @error('password')
+                        <small class="text-danger">{{ $message }}</small>
+
+                        @enderror
+                        <br>
+                        <!-- Update user Button -->
+                        <div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-edit me-2"></i>Update user
+                            </button>
+
+                        </div>
                 </form>
             </div>
             @else
@@ -40,13 +60,19 @@
                         <label for="user-name" class="form-label">User</label>
                         <input type="text" name="name" id="user-name" class="form-control" value="">
                     </div>
-
-                    <!-- Delete user Button -->
-                    <div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-plus me-2"></i>Delete User
-                        </button>
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Your Email">
                     </div>
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Your Password">
+                        <!-- Delete user Button -->
+                        <div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-plus me-2"></i>Delete User
+                            </button>
+                        </div>
                 </form>
             </div>
             @endif

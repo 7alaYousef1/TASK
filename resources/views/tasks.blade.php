@@ -29,7 +29,7 @@
             </div>
             @else
             <div class="card-header">
-                Update Task
+                Delete Task
             </div>
             <div class="card-body">
                 <!-- Delete Task Form -->

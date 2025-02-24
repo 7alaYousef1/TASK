@@ -12,10 +12,17 @@ class UserController extends Controller
         $users = DB::table('users')->get();
         return view('users', compact('users'));
     }
-    public function create()
+    public function create(Request $request)
     {
+        $request->validate([
+            'name' => 'required | min:3',
+            'email' => 'required',
+            'password'=>'required'
+        ]);
         $user_name = $_POST['name'];
-        DB::table('users')->insert(['name' => $user_name]);
+        $user_email = $_POST['email'];
+        $user_password = $_POST['password'];
+        DB::table('users')->insert(['name' => $user_name , 'email' => $user_email , 'password' => $user_password]);
         return redirect()->back();
     }
     public function destroy($id)
@@ -32,7 +39,7 @@ class UserController extends Controller
     public function update()
     {
         $id = $_POST['id'];
-        DB::table('users')->where('id', $id)->update(['name' => $_POST['name']]);
+        DB::table('users')->where('id', $id)->update(['name' => $_POST['name'], 'email' => $_POST['email'], 'password' => $_POST['password']]);
         return redirect('users');
     }
 }
