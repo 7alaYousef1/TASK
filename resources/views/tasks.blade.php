@@ -1,50 +1,50 @@
 @extends('layouts.app')
 @section('content')
 <div class="container mt-4">
-    <h1>Task List App</h1>
-    <div class="offset-md-2 col-md-8">
+    <div class="col-md-8 offset-md-2">
         <div class="card">
+
             @if (isset($task))
             <div class="card-header">
                 Update Task
             </div>
+
+
             <div class="card-body">
-                <!-- Update Task Form -->
                 <form action="{{ url('update') }}" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{ $task->id }}">
                     <!-- Task Name -->
                     <div class="mb-3">
-                        <label for="task-name" class="form-label">Task</label>
-                        <input type="text" name="name" id="task-name" class="form-control" value="{{ $task->name }}">
+                        <label for="task-name" class="form-label">task</label>
+                        <input type="text" name="name" id="-name" class="form-control" value="{{ $task->name }}">
                     </div>
-
-                    <!-- Update Task Button -->
-                    <div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-edit me-2"></i>Update Task
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save me-2"></i>Update Task
+                    </button>
                 </form>
             </div>
             @else
+
             <div class="card-header">
-                Delete Task
+                New Task
             </div>
+
             <div class="card-body">
-                <!-- Delete Task Form -->
-                <form action="create" method="POST">
-                    @csrf
+                <!-- New Task Form -->
+                <form action="tasks.create" method="POST">
+                    @CSrf
                     <!-- Task Name -->
                     <div class="mb-3">
-                        <label for="task-name" class="form-label">Task</label>
+                        <label for="task-name" class="form-label">task</label>
                         <input type="text" name="name" id="task-name" class="form-control" value="">
                     </div>
 
-                    <!-- Delete Task Button -->
+
+                    <!-- Add Task Button -->
                     <div>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-plus me-2"></i>Delete Task
+                            <i class="fa fa-plus me-2"></i>Add Task
                         </button>
                     </div>
                 </form>
@@ -52,11 +52,9 @@
             @endif
         </div>
 
-        <!-- Current Tasks -->
+
         <div class="card mt-4">
-            <div class="card-header">
-                Current Tasks
-            </div>
+            <div class="card-header">Current Tasks</div>
             <div class="card-body">
                 <table class="table table-striped">
                     <thead>
@@ -68,20 +66,18 @@
                     <tbody>
                         @foreach ($tasks as $task)
                         <tr>
-                            <td>{{$task->name}}</td>
+                            <td>{{ $task->name }}</td>
                             <td>
-                                <form action="/delete/{{ $task->id }}" method="POST" class="d-inline">
+                                <form action="{{ route('tasks.delete', $task->id) }}" method="POST" class="d-inline">
                                     @csrf
+                                    @method('DELETE')
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash me-2"></i>Delete
                                     </button>
                                 </form>
-                                <form action="/edit/{{ $task->id }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-info me-2"></i>Edit
-                                    </button>
-                                </form>
+                                <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-info">
+                                    <i class="fa fa-edit me-2"></i>Edit
+                                </a>
                             </td>
                         </tr>
                         @endforeach

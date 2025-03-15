@@ -38,14 +38,13 @@ Route::post('/about', function () {
     ];
     return view('about', compact('name', 'departments'));
 });
-Route::get('tasks',  [TaskController::class,'index']);
-Route::post('create', [TaskController::class, 'create']);
-Route::post('delete/{id}', [TaskController::class,'destroy']);
-Route::post('edit/{id}',[TaskController::class,'edit']);
-Route::post('update', [TaskController::class,'update']);
-Route::get('app', function(){
-    return view('layouts.app');
-});
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::post('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::delete('/tasks/delete/{id}', [TaskController::class, 'delete'])->name('tasks.delete');
+Route::get('/tasks/edit/{id}', [TaskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/update/{id}', [TaskController::class, 'update'])->name('tasks.update');
+
+
 
 // Users Routs
 Route::get('users',  [UserController::class,'index']);
@@ -53,3 +52,6 @@ Route::post('create', [UserController::class, 'create']);
 Route::post('delete/{id}', [UserController::class,'destroy']);
 Route::post('edit/{id}',[UserController::class,'edit']);
 Route::post('update', [UserController::class,'update']);
+Route::get('app', function () {
+    return view('layouts.app');
+});
